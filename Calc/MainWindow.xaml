@@ -1,0 +1,93 @@
+﻿<Window x:Class="Calc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calc"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="300">
+    <Window.Resources>
+        <Style x:Key="Button">
+            <Setter Property="Control.FontFamily" Value="Cambria" />
+            <Setter Property="Control.FontSize" Value="18" />
+            <Setter Property="Control.Margin" Value="4" />
+            <Setter Property="Control.Foreground" Value="Black" />
+        </Style>
+        <Style x:Key="DigitButton" BasedOn="{StaticResource Button}">
+            <Setter Property="Control.Background" Value="LightGreen"/>
+            <Setter Property="Control.FontWeight" Value="Regular" />
+            <EventSetter Event="Button.Click" Handler="Digit_Click" />
+        </Style>
+        <Style x:Key="CommandButton" BasedOn="{StaticResource Button}">
+            <Setter Property="Control.Background" Value="LightBlue"/>
+            <Setter Property="Control.FontWeight" Value="UltraBlack" />
+            <EventSetter Event="Button.Click" Handler="Command_Click" />
+        </Style>
+        <Style x:Key="ClearButton" BasedOn="{StaticResource Button}">
+            <Setter Property="Control.FontWeight" Value="UltraBlack" />
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="DarkRed" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="Button.Click" Handler="Clear_Click" />
+        </Style>
+        <Style x:Key="EqButton" BasedOn="{StaticResource CommandButton}">
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="Green" Offset="0"/>
+                            <GradientStop Color="DarkGreen" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <EventSetter Event="Button.Click" Handler="Equals_Click" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="Display"/>
+        <Button Tag="C" Content="C"   Grid.Column="0" Grid.Row="1" Style="{StaticResource ClearButton}"/>
+        <Button Tag="inv" Content="1/x" Grid.Column="1" Grid.Row="1" Style="{StaticResource CommandButton}"/>
+        <Button Tag="sqrt" Content="√"   Grid.Column="2" Grid.Row="1" Style="{StaticResource CommandButton}"/>
+        <Button Tag="/" Content="÷"   Grid.Column="3" Grid.Row="1" Style="{StaticResource CommandButton}"/>
+        <Button Tag="7" Content="7" Grid.Column="0" Grid.Row="2" Style="{StaticResource DigitButton}"/>
+        <Button Tag="8" Content="8" Grid.Column="1" Grid.Row="2" Style="{StaticResource DigitButton}"/>
+        <Button Tag="9" Content="9" Grid.Column="2" Grid.Row="2" Style="{StaticResource DigitButton}"/>
+        <Button Tag="*" Content="×" Grid.Column="3" Grid.Row="2" Style="{StaticResource CommandButton}"/>
+        <Button Tag="4" Content="4" Grid.Column="0" Grid.Row="3" Style="{StaticResource DigitButton}"/>
+        <Button Tag="5" Content="5" Grid.Column="1" Grid.Row="3" Style="{StaticResource DigitButton}"/>
+        <Button Tag="6" Content="6" Grid.Column="2" Grid.Row="3" Style="{StaticResource DigitButton}"/>
+        <Button Tag="-" Content="-" Grid.Column="3" Grid.Row="3" Style="{StaticResource CommandButton}"/>
+        <Button Tag="1" Content="1" Grid.Column="0" Grid.Row="4" Style="{StaticResource DigitButton}"/>
+        <Button Tag="2" Content="2" Grid.Column="1" Grid.Row="4" Style="{StaticResource DigitButton}"/>
+        <Button Tag="3" Content="3" Grid.Column="2" Grid.Row="4" Style="{StaticResource DigitButton}"/>
+        <Button Tag="+" Content="+" Grid.Column="3" Grid.Row="4" Style="{StaticResource CommandButton}"/>
+        <Button Tag="pm" Content="±" Grid.Column="0" Grid.Row="5" Style="{StaticResource DigitButton}"/>
+        <Button Tag="0" Content="0" Grid.Column="1" Grid.Row="5" Style="{StaticResource DigitButton}"/>
+        <Button Tag="." Content="," Grid.Column="2" Grid.Row="5" Style="{StaticResource DigitButton}"/>
+        <Button Tag="=" Content="=" Grid.Column="3" Grid.Row="5" Style="{StaticResource EqButton}"/>
+    </Grid>
+</Window>
