@@ -71,7 +71,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="Display"/>
         <Button Tag="C" Content="C"   Grid.Column="0" Grid.Row="1" Style="{StaticResource ClearButton}"/>
         <Button Tag="inv" Content="1/x" Grid.Column="1" Grid.Row="1" Style="{StaticResource CommandButton}"/>
-        <Button Tag="sqrt" Content="√"   Grid.Column="2" Grid.Row="1" Style="{StaticResource CommandButton}"/>
+        <Button Tag="sqrt" Content="√" Grid.Column="2" Grid.Row="1" Style="{StaticResource CommandButton}"/>
         <Button Tag="/" Content="÷"   Grid.Column="3" Grid.Row="1" Style="{StaticResource CommandButton}"/>
         <Button Tag="7" Content="7" Grid.Column="0" Grid.Row="2" Style="{StaticResource DigitButton}"/>
         <Button Tag="8" Content="8" Grid.Column="1" Grid.Row="2" Style="{StaticResource DigitButton}"/>
