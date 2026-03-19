@@ -88,64 +88,6 @@ namespace Calc
 
         private void Command_Click(object sender, RoutedEventArgs e)
         {
-            //if (sender is Button btn)
-            //{
-            //    string tag = (string)btn.Tag;
-
-            //    if (tag == "inv" || tag == "sqrt")
-            //    {
-            //        if (!_nn)
-            //        {
-
-            //            double og = _c;
-            //            if (tag == "inv")
-            //            {
-            //                if (_c == 0) { MessageBox.Show("Деление на ноль"); return; }
-            //                _c = 1 / _c;
-            //            }
-            //            else
-            //            {
-            //                if (_c < 0) { MessageBox.Show("Корень из отрицательного"); return; }
-            //                _c = Math.Sqrt(_c);
-            //            }
-
-            //            if (_num.Count > 0) _num[_num.Count - 1] = _c;
-            //            else _num.Add(_c);
-
-            //            int lastSpaceIndex = _ex.LastIndexOf(' ');
-            //            _ex = (lastSpaceIndex >= 0 ? _ex.Substring(0, lastSpaceIndex + 1) : "")
-            //                  + GetFunctionSymbol(tag) + og;
-
-            //            Display.Text = _ex;
-            //            _nn = true;
-            //            return;
-            //        }
-
-            //        if (!string.IsNullOrEmpty(_fun)) ApplyFunctionToCurrentNumber();
-            //        if (_num.Count == 0 && !_nn) _num.Add(_c);
-
-            //        _fun = tag;
-            //        _ex += " " + GetFunctionSymbol(tag);
-            //        Display.Text = _ex;
-            //        _nn = true;
-            //        return;
-            //    }
-
-            //    if (!string.IsNullOrEmpty(_fun)) ApplyFunctionToCurrentNumber();
-
-            //    if (_num.Count == 0 && !_nn) _num.Add(_c);
-            //    else if (!_nn)
-            //    {
-            //        _num.Add(_c);
-            //        _oper.Add(_op);
-            //        ProcessHighPriorityOperations();
-            //    }
-
-            //    _op = tag;
-            //    _nn = true;
-            //    _ex += " " + GetOperatorSymbol(tag) + " ";
-            //    Display.Text = _ex;
-            //}
             if (sender is Button btn)
             {
                 string tag = (string)btn.Tag;
@@ -186,8 +128,6 @@ namespace Calc
                 {
                     _num.Add(_c);
                     _oper.Add(_op);
-
-                    ProcessHighPriorityOperations();
                 }
 
                 _op = tag;
@@ -230,8 +170,6 @@ namespace Calc
                     }
                     break;
             }
-
-            _ex += _c.ToString();
 
             if (_num.Count == 0)
             {
