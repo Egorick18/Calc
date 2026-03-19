@@ -22,11 +22,9 @@ namespace Calc
         private string _op = "";
         private bool _nn = true;
         private string _ex = "";
-
+        private string _fun = "";
         private List<double> _num = new List<double>();
         private List<string> _oper = new List<string>();
-
-        private string _fun = "";
 
         public MainWindow()
         {
@@ -96,7 +94,7 @@ namespace Calc
                 {
                     if (!string.IsNullOrEmpty(_fun) && !_nn)
                     {
-                        ApplyFunctionToCurrentNumber();
+                        FunctionToCurrentNumber();
                     }
 
                     if (_num.Count == 0 && !_nn)
@@ -116,7 +114,7 @@ namespace Calc
 
                 if (!string.IsNullOrEmpty(_fun) && !_nn)
                 {
-                    ApplyFunctionToCurrentNumber();
+                    FunctionToCurrentNumber();
                     _fun = "";
                 }
 
@@ -140,7 +138,7 @@ namespace Calc
             }
         }
 
-        private void ApplyFunctionToCurrentNumber()
+        private void FunctionToCurrentNumber()
         {
             switch (_fun)
             {
@@ -177,7 +175,7 @@ namespace Calc
             }
         }
 
-        private void ProcessHighPriorityOperations()
+        private void PriorityOperations()
         {
             for (int i = _oper.Count - 1; i >= 0; i--)
             {
@@ -235,7 +233,7 @@ namespace Calc
         {
             if (!string.IsNullOrEmpty(_fun) && !_nn)
             {
-                ApplyFunctionToCurrentNumber();
+                FunctionToCurrentNumber();
                 _fun = "";
             }
 
@@ -250,7 +248,7 @@ namespace Calc
 
             if (_num.Count > 0)
             {
-                ProcessHighPriorityOperations();
+                PriorityOperations();
 
                 _c = CalculateResult();
                 _ex = _c.ToString();
