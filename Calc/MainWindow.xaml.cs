@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Runtime.Remoting.Messaging;
 
 
 namespace Calc
@@ -25,7 +26,8 @@ namespace Calc
         private string _fun = "";
         private List<double> _num = new List<double>();
         private List<string> _oper = new List<string>();
-
+        private bool _err = false;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +35,8 @@ namespace Calc
 
         private void Digit_Click(object sender, RoutedEventArgs e)
         {
+            if (_err) return;
+            
             if (sender is Button btn)
             {
                 if (_nn)
@@ -86,6 +90,8 @@ namespace Calc
 
         private void Command_Click(object sender, RoutedEventArgs e)
         {
+            if (_err) return;
+
             if (sender is Button btn)
             {
                 string tag = (string)btn.Tag;
@@ -149,8 +155,7 @@ namespace Calc
                     }
                     else
                     {
-                        MessageBox.Show("Деление на ноль", "Ошибка",
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        Error("Деление на 0");
                         return;
                     }
                     break;
@@ -162,8 +167,7 @@ namespace Calc
                     }
                     else
                     {
-                        MessageBox.Show("Корень из отрицательного числа", "Ошибка",
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        Error("Корень из отрицательного числа");
                         return;
                     }
                     break;
@@ -195,8 +199,7 @@ namespace Calc
                         }
                         else
                         {
-                            MessageBox.Show("Деление на ноль", "Ошибка",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            Error("Деление на 0");
                             return;
                         }
                     }
@@ -212,25 +215,27 @@ namespace Calc
         {
             if (_num.Count == 0) return 0;
 
-            double result = _num[0];
+            double res = _num[0];
 
             for (int i = 0; i < _oper.Count; i++)
             {
                 if (_oper[i] == "+")
                 {
-                    result += _num[i + 1];
+                    res += _num[i + 1];
                 }
                 else if (_oper[i] == "-")
                 {
-                    result -= _num[i + 1];
+                    res -= _num[i + 1];
                 }
             }
 
-            return result;
+            return res;
         }
 
         private void Equals_Click(object sender, RoutedEventArgs e)
         {
+            if (_err) return;
+            
             if (!string.IsNullOrEmpty(_fun) && !_nn)
             {
                 FunctionToCurrentNumber();
@@ -248,13 +253,17 @@ namespace Calc
 
             if (_num.Count > 0)
             {
+                
+                
                 PriorityOperations();
-
+                if (_err) return;
                 _c = CalculateResult();
                 _ex = _c.ToString();
                 Display.Text = _ex;
             }
-            
+            _num.Clear();
+            _oper.Clear();
+            _num.Add(_c);
             _nn = true;
         }
 
@@ -269,6 +278,7 @@ namespace Calc
             _oper.Clear();
             _fun = "";
             Display.Text = "0";
+            _err = false;
         }
 
         private string GetOperatorSymbol(string tag)
@@ -291,6 +301,13 @@ namespace Calc
                 case "sqrt": return "√";
                 default: return "";
             }
+        }
+        private void Error(string errorMessage)
+        {
+            _err = true;
+            _ex = "";
+            Display.Text = errorMessage;
+
         }
     }
 }
